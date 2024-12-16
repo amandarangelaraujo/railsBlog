@@ -1,0 +1,20 @@
+<header style="background-color: #333; color: #fff; padding: 10px;">
+    <nav>
+        <h1>Projeto K</h1>
+        <% if logged_in? %>
+            <li style="display: inline; margin-right: 10px;">
+                <%= button_to "LOGOUT", logout_path, method: :delete, style: "color: #fff;"  %>
+            </li>
+            <li style="display: inline; margin-right: 10px;">
+                Bem-vindo, <%= current_user.name %>!
+            </li>
+        <% else %>
+          <li style="display: inline; margin-right: 10px;">
+            <%= link_to "Login", login_path, style: "color: #fff;" %>
+          </li>
+          <li style="display: inline; margin-right: 10px;">
+            <%= link_to "Cadastrar", new_user_path, style: "color: #fff;" %>
+          </li>
+        <% end %>
+    </nav>
+</header>

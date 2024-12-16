@@ -13,4 +13,8 @@
   <% end %>
 </div>
 
-<%= link_to "New comment", new_article_comment_path() %>
+<% if logged_in? %>
+  <%= link_to "New comment", new_article_comment_path() %>
+<% end %>
+
+<%= link_to "Back to Article",article_path(@article) %>

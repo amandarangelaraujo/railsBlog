@@ -5,25 +5,33 @@ class ArticlesController < ApplicationController
   # GET /articles or /articles.json
   def index
     @articles = Article.all
+    if logged_in?
+      @user = current_user
+    end
   end
 
   # GET /articles/1 or /articles/1.json
   def show
+    @article = Article.find(params[:id])
   end
 
   # GET /articles/new
   def new
-    @article = @user.articles.build
-    @user = User.find(params[:user_id])
+    if logged_in?
+      @user = current_user
+    end
+
+    @article = @user.articles.build(article_params)
   end
 
   # GET /articles/1/edit
   def edit
+    @user = current_user
   end
 
   # POST /articles or /articles.json
   def create
-    @article = @user.articles.build
+    @article = @user.articles.build(article_params)
     
     respond_to do |format|
       if @article.save
@@ -64,11 +72,11 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params.expect(:id))
+      @article = Article.find(params[:id])
     end
 
     def set_user
-      @user = User.find(params[:user_id])
+      @user = current_user
     end
 
     # Only allow a list of trusted parameters through.

@@ -23,6 +23,19 @@
   </head>
 
   <body>
+    <!-- Adicionar um cabeçalho -->
+    <% if flash[:notice] %>
+      <div style="color: green; padding: 10px; border: 1px solid green;">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div style="color: red; padding: 10px; border: 1px solid red;">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <%= render "layouts/header" %>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,11 @@
+ => 
+[32m#<User:0x00007f7bb05b49a0[0m
+ id: [34m[1m2[0m,
+ user_type: [36m[1mnil[0m,
+ name: [31m[1m"[0m[31mJohn Doe[0m[31m[1m"[0m,
+ email: [31m[1m"[0m[31m[FILTERED][0m[31m[1m"[0m,
+ password_digest: [31m[1m"[0m[31m[FILTERED][0m[31m[1m"[0m,
+ created_at:
+  [31m[1m"[0m[31m2024-12-16 15:44:48.609373000 +0000[0m[31m[1m"[0m,
+ updated_at:
+  [31m[1m"[0m[31m2024-12-16 15:44:48.609373000 +0000[0m[31m[1m"[0m[32m>[0m 

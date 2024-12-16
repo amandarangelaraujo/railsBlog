@@ -21,10 +21,7 @@
     <%= form.textarea :body %>
   </div>
 
-  <div>
-    <%= form.label :User, style: "display: block" %>
-    <%= form.textarea :user_id %>
-  </div>
+  <%= form.hidden_field :user_id, value: @user.id %>
 
 
   <div>

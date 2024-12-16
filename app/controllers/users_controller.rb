@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
+        format.html { redirect_to login_path, notice: "Usuário cadastrado com sucesso, faça login" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -62,11 +62,14 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params.expect(:id))
+      @user = User.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.expect(user: [ :user_type, :name, :email, :password_digest ])
+     
+      params.require(:user).permit(:user_type, :name, :email, :password,  :password_confirmation)
+
+      # params.expect(user: [ :user_type, :name, :email, :password_digest ])
     end
 end

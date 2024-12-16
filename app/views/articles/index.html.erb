@@ -14,3 +14,11 @@
     <hr>
   <% end %>
 </div>
+
+
+<div>
+  <h1>Publicar novo artigo</h1>
+    <% if logged_in? %>
+      <%= link_to "Criar novo artigo", new_user_article_path(current_user.id)%>
+    <%end%>
+</div>

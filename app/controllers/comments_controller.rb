@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
+  load_and_authorize_resource
 
   # GET /comments or /comments.json
   def index
@@ -9,14 +10,14 @@ class CommentsController < ApplicationController
 
   # GET /comments/1 or /comments/1.json
   def show
+    @user = current_user
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
   end
 
   # GET /comments/new
   def new
-    #deixar esse id provisório
-    @user = 1
+    @user = current_user
     @article = Article.find(params[:article_id])
     @comment = @article.comments.build
 
@@ -30,7 +31,7 @@ class CommentsController < ApplicationController
 
   # POST /comments or /comments.json
   def create
-    @user = User.find(1)
+    @user = current_user
     @article = Article.find(params[:article_id])
     @comment = @article.comments.build(comment_params)
     @comment.user = @user
@@ -63,9 +64,8 @@ class CommentsController < ApplicationController
   # DELETE /comments/1 or /comments/1.json
   def destroy
     @comment.destroy!
-
     respond_to do |format|
-      format.html { redirect_to comments_path, status: :see_other, notice: "Comment was successfully destroyed." }
+      format.html { redirect_to article_comments_path(@article), status: :see_other, notice: "Comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -73,7 +73,8 @@ class CommentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params.expect(:id))
+      @article = Article.find(params[:article_id])
+      @comment = @article.comments.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

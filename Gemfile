@@ -40,6 +40,9 @@ gem "thruster", require: false
 # Gems de segurança ou autenticação
 gem 'bcrypt'
 
+#Gem de autorização
+gem 'cancancan'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

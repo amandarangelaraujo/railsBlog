@@ -10,4 +10,11 @@ class ApplicationController < ActionController::Base
   def logged_in?
     current_user.present?
   end
+
+  # class ApplicationController < ActionController::Base
+  #   rescue_from CanCan::AccessDenied do |exception|
+  #     redirect_to root_path, alert: "Você não tem permissão para acessar esta página."
+  #   end
+  # end
+  
 end

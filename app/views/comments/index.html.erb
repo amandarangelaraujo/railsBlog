@@ -6,14 +6,17 @@
 
 <div id="comments">
   <% @comments.each do |comment| %>
+    <hr>
     <%= render comment %>
     <p>
-      <%= link_to "Show this comment",article_comment_path(comment.article, comment) %>
+      <% if can? :manage, comment %>
+        <%= link_to "Show this comment",article_comment_path(comment.article, comment) %>
+      <%end%>
     </p>
   <% end %>
 </div>
 
-<% if logged_in? %>
+<% if can? :create, Comment %>
   <%= link_to "New comment", new_article_comment_path() %>
 <% end %>
 

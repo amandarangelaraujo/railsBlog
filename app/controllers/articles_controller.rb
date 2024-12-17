@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
   before_action :set_user, only: [:new, :create]
+  load_and_authorize_resource
 
   # GET /articles or /articles.json
   def index
@@ -21,7 +22,7 @@ class ArticlesController < ApplicationController
       @user = current_user
     end
 
-    @article = @user.articles.build(article_params)
+    
   end
 
   # GET /articles/1/edit
@@ -31,6 +32,7 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
+    @user = current_user
     @article = @user.articles.build(article_params)
     
     respond_to do |format|

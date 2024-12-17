@@ -2,14 +2,12 @@
 
 <%= render @article %>
 
-<div>
-  <% if logged_in? && current_user.id == @article.user_id %>
+<div style="line-height: 1.8;" >
+  <% if can? :edit, @article %>
     <%# Se o autor do artigo for o mesmo que o usuário %>
     <%= link_to "Edit this article", edit_article_path(@article) %> |
     <%= button_to "Destroy this article", @article, method: :delete %>
-    
-  <% else %>
-    <%= link_to "Back to articles", articles_path %>
-    <%= link_to "Comentários", article_comments_path(@article) %>
   <%end%>
+  <%= link_to "Back to articles", articles_path %> | <br>
+  <%= link_to "Comentários", article_comments_path(@article) %>
 </div>

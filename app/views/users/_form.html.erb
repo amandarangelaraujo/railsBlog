@@ -14,6 +14,7 @@
   <div>
     <%= form.label :user_type, "Tipo de Usuário", style: "display: block" %>
     <%= form.select :user_type, [["Visitante", 1], ["Autor", 2]], {}, style: "display: block" %>
+    <%# <%= form.select :user_type, User.user_types.keys.map { |key| [key.humanize, key] }, style: "display: block" %> 
   </div>
 
   <div>

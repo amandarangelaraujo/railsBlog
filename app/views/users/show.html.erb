@@ -14,9 +14,9 @@
       </li>
     <% end %>
   </ul>
-  
+
   <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+  <%= link_to "Back to users",  admin_users_path, method: :get %>
   <%= link_to "Create Article", new_user_article_path(@user) %>
   <%= button_to "Destroy this user", @user, method: :delete %>
 </div>

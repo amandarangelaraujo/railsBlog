@@ -23,19 +23,41 @@
   </head>
 
   <body>
-    <!-- Adicionar um cabeçalho -->
+    
     <% if flash[:notice] %>
-      <div style="color: green; padding: 10px; border: 1px solid green;">
+      <div id="flash-notice" style="color: green; padding: 10px; border: 1px solid green;">
         <%= flash[:notice] %>
       </div>
     <% end %>
 
     <% if flash[:alert] %>
-      <div style="color: red; padding: 10px; border: 1px solid red;">
+      <div id="flash-alert" style="color: red; padding: 10px; border: 1px solid red;">
         <%= flash[:alert] %>
       </div>
     <% end %>
     <%= render "layouts/header" %>
     <%= yield %>
+    <script>
+      document.addEventListener("turbo:load", function () {
+        // Encontrar os elementos de flash
+        const notice = document.getElementById("flash-notice");
+        const alert = document.getElementById("flash-alert");
+
+        // Ocultar o flash-notice após 5 segundos
+        if (notice) {
+          setTimeout(() => {
+            notice.style.display = "none";
+          }, 5000); // 5000ms = 5 segundos
+        }
+
+        // Ocultar o flash-alert após 5 segundos
+        if (alert) {
+          setTimeout(() => {
+            alert.style.display = "none";
+          }, 5000); // 5000ms = 5 segundos
+        }
+      });
+    </script>
   </body>
+  
 </html>

@@ -14,7 +14,9 @@
     <hr>
   <% end %>
 </div>
-
+<% if can? :manage, :all%>
+  <%= button_to "Administração", admin_users_path, method: :get %>
+<% end %>
 <% if can? :create, Article %>
   <%= link_to "Criar novo artigo", new_user_article_path(current_user.id) %>
 <% end %>

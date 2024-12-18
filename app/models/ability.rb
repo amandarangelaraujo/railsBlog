@@ -11,18 +11,22 @@ class Ability
     if user.user_type==3
       can :manage, :all # Administrador pode gerenciar tudo
     elsif user.user_type==2
+      can :destroy, Comment, article: { user_id: user.id } 
       can :create, Article
       can :create, Comment
       can :manage, Article, user_id: user.id 
       can :manage, Comment, user_id: user.id
       can :read, Article # Autor pode gerenciar seus próprios artigos
+    elsif user.user_type==1
+      can :create, Comment
+      can :manage, Comment, user_id: user.id
+      can :read, Article
     else
-      can :read, Article # Visitantes podem apenas ler os artigos
+      can :read, Article
+      can :read, Comment# Visitantes podem apenas ler os artigos
     end
 
-
-
-
+  
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

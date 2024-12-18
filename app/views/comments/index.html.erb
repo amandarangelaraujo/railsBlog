@@ -9,7 +9,12 @@
     <hr>
     <%= render comment %>
     <p>
-      <% if can? :manage, comment %>
+      <%if can? :destroy, comment%>
+        <%= button_to "Apagar esse comentário",article_comment_path(comment.article, comment), method: :delete %>
+      <%end%>
+    </p>
+    <p>
+      <% if can? :edit, comment %>
         <%= link_to "Show this comment",article_comment_path(comment.article, comment) %>
       <%end%>
     </p>

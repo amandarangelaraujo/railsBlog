@@ -1,0 +1,13 @@
+<h1>View de Admim</h1>
+<p>Aqui você pode mudar o tipo dos outros usuários</p>
+<div id="users">
+  <%= link_to "Voltar para articles", Article,style: "display: block; margin-bottom: 5px;" %>  
+  <% @users.each do |user| %>
+    <div>
+      <%= user.name %> (<%= user.email %>)
+      <%= link_to "Editar usuário", edit_user_path(user) %> |
+      <%= button_to "Destruir esse usuário", user, method: :delete%>
+    </div>
+    <hr>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_13_162237) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_18_184225) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -48,6 +48,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_162237) do
   end
 
   add_foreign_key "articles", "users"
-  add_foreign_key "comments", "articles"
+  add_foreign_key "comments", "articles", on_delete: :cascade
   add_foreign_key "comments", "users"
 end

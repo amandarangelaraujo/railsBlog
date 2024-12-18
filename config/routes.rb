@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "articles#index"
-  
+
   # Rotas para login/logout
   get '/login', to: 'sessions#new', as: :login
   post '/login', to: 'sessions#create'
@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :articles
+    collection do
+      get :admin
+    end
   end
   
   resources :articles do

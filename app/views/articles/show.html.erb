@@ -8,6 +8,8 @@
     <%= link_to "Edit this article", edit_article_path(@article) %> |
     <%= button_to "Destroy this article", @article, method: :delete %>
   <%end%>
+  <%if can? :read, Comment%>
+    <%= link_to "Comentários", article_comments_path(@article) %>
+  <%end%>
   <%= link_to "Back to articles", articles_path %> | <br>
-  <%= link_to "Comentários", article_comments_path(@article) %>
 </div>

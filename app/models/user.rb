@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # enum user_type: {commenter: 0, author: 1, admin: 2}
   has_secure_password
-  validate :strong_password
+  validate :strong_password, if: :password_required?
   validates :password, confirmation: true # Valida a confirmação da senha
   validates :password_confirmation, presence: true, if: :password_digest_changed?
   has_many :comments,dependent: :destroy
@@ -21,6 +21,11 @@ class User < ApplicationRecord
   end
 
   private
+  #para saber se tem senha ou não e poder usar meu formulário
+  #Nao deixa o strong_password ser chamado
+  def password_required?
+    password.present? || new_record?
+  end
 
   def strong_password
     unless self.class.strong_password?(password)

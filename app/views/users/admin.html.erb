@@ -6,6 +6,7 @@
     <div>
       <%= user.name %> (<%= user.email %>)
       <%= link_to "Editar usuário", edit_user_path(user) %> |
+      <%= link_to "Editar usuário2", edit_user_type_user_path(user) %> |
       <%= button_to "Destruir esse usuário", user, method: :delete%>
     </div>
     <hr>

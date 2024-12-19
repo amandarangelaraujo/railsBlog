@@ -5,14 +5,19 @@
 <h1>Articles</h1>
 
 <div id="articles">
-  <% @articles.each do |article| %>
-    <%= render article %>
-    <p>
-      <%= link_to "Show this article", article %>
-    </p>
-    <p></p>
-    <hr>
-  <% end %>
+    <% @articles.each do |article| %>
+      <div id="artigo", style="border: 1px solid #E0E0E0; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+        <strong>Título: </strong>
+        <%= article.title %> <br>
+        <strong>Autor: </strong>
+        <%= article.user.name %>
+        <p>
+          <%= link_to "Show this article", article %>
+        </p>
+        <p></p>
+        <hr>
+        </div>
+    <% end %>
 </div>
 <% if can? :manage, :all%>
   <%= button_to "Administração", admin_users_path, method: :get %>

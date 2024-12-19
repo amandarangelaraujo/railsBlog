@@ -5,11 +5,11 @@ class CommentsController < ApplicationController
   # GET /comments or /comments.json
   def index
     @article = Article.find(params[:article_id])
-    @comments = @article.comments.order(created_at: :desc)
+    @comments = @article.comments.order(created_at: :asc)
   end
 
   # GET /comments/1 or /comments/1.json
-  def show
+  def show  
     @user = current_user
     @article = Article.find(params[:article_id])
     @comment = @article.comments.find(params[:id])
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to article_comments_path(@article), notice: "Comment was successfully created." }
+        format.html { redirect_to  article_path(@article), notice: "Comment was successfully created." }
         format.json { render :show, status: :created, location: @comment }
       else
   
@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to article_comments_path(@article), notice: "Comment was successfully updated." }
+        format.html { redirect_to article_path(@article), notice: "Comment was successfully updated." }
         format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,7 +65,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy!
     respond_to do |format|
-      format.html { redirect_to article_comments_path(@article), status: :see_other, notice: "Comment was successfully destroyed." }
+      format.html { redirect_to article_path(@article), status: :see_other, notice: "Comment was successfully destroyed." }
       format.json { head :no_content }
     end
   end

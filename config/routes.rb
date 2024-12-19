@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     collection do
       get :admin
     end
+    member do
+      get :edit_user_type #mesmo nome que tem no controller
+      patch :update_user_type #é o mesmo nome chamado no controlador
+    end
   end
   
   resources :articles do

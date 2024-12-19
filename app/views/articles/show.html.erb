@@ -1,15 +1,46 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: green; margin-bottom: 10px;"><%= notice %></p>
 
 <%= render @article %>
 
-<div style="line-height: 1.8;" >
+<section style="margin-top: 20px;">
+  <h2 style="font-size: 20px; border-bottom: 2px solid #FF7F11; display: inline-block; padding-bottom: 5px;">
+    Comentários:
+  </h2>
+
+  <div id="comments" style="margin-top: 15px;">
+    <% if @article.comments.any? %>
+      <% @article.comments.each do |comment| %>
+        <div style="border: 1px solid #E0E0E0; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+          <%= render comment %>
+
+          <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <% if can? :destroy, comment %>
+              <%= button_to "Apagar", article_comment_path(comment.article, comment), method: :delete, class: "btn btn-danger", style: "padding: 5px 10px;" %>
+            <% end %>
+            <% if can? :edit, comment %>
+              <%= link_to "Editar", edit_article_comment_path(comment.article, comment), class: "btn btn-primary", style: "padding: 5px 10px;" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="color: #888;">Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+    <% end %>
+
+    <% if can? :create, Comment %>
+      <div style="margin-top: 20px;">
+        <%= link_to "Fazer um novo comentário", new_article_comment_path(@article), class: "btn btn-success", style: "padding: 10px 20px;" %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<hr style="margin: 30px 0;">
+
+<section style="line-height: 1.8;">
   <% if can? :edit, @article %>
-    <%# Se o autor do artigo for o mesmo que o usuário %>
-    <%= link_to "Edit this article", edit_article_path(@article) %> |
-    <%= button_to "Destroy this article", @article, method: :delete %>
-  <%end%>
-  <%if can? :read, Comment%>
-    <%= link_to "Comentários", article_comments_path(@article) %>
-  <%end%>
-  <%= link_to "Back to articles", articles_path %> | <br>
-</div>
+    <%= link_to "Editar este artigo", edit_article_path(@article), class: "btn btn-primary", style: "padding: 10px 20px; margin-right: 10px;" %>
+    <%= button_to "Excluir este artigo", @article, method: :delete, class: "btn btn-danger", style: "padding: 10px 20px;" %>
+  <% end %>
+  <%= link_to "Voltar para artigos", articles_path, class: "btn btn-secondary", style: "padding: 10px 20px; margin-top: 10px; display: inline-block;" %>
+</section>

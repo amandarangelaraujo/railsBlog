@@ -1,17 +1,25 @@
 <div id="<%= dom_id article %>">
-  <p>
+  <p style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px; color: #333;">
     <strong>Title:</strong>
     <%= article.title %>
   </p>
-  <p>
+  <p style="font-size: 1em; margin-bottom: 10px; color: #555;">
     Autor
     <%= article.user.name%>
   </p>
-  <p>
+  <p style="font-size: 1em;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #333">
     <strong>Body:</strong>
     <%= article.body %>
   </p>
-  <p>
+  <% if @article.photo.attached? %>
+    <p style="margin-bottom: 20px; text-align: center; border-radius: 8px; border: 1px solid #ddd;">
+      <%= image_tag @article.photo, width: 150, height: 150%>
+    </p>
+  <% end %>
+  <p style="border-radius: 8px; border: 1px solid #ddd;">
     <strong>Created at</strong>
     <%= dateBR(article.created_at) %>
   <p>

@@ -23,6 +23,10 @@
 
   <%= form.hidden_field :user_id, value: @user.id %>
 
+  <div style="padding: 10px">
+    <%= form.label :photo %>
+    <%= form.file_field :photo %>
+  </div>
 
   <div>
     <%= form.submit %>
